@@ -1,0 +1,51 @@
+CREATE TABLE cars (
+	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	name VARCHAR(255) NOT NULL,
+	model VARCHAR(255) NOT NULL,
+	"year" INTEGER NOT NULL,
+	price FLOAT NOT NULL
+);
+INSERT INTO cars (name, model, "year", price) VALUES
+('Kia', 'Sportage', 2015, 22000.00),
+('Volkswagen', 'Golf', 2016, 18000.00),
+('Jeep', 'Cherokee', 2017, 26000.00),
+('Cadillac', 'XT5', 2018, 34000.00),
+('Infinity', 'QX60', 2019, 32000.00),
+('Mini', 'Countryman', 2020, 35000.00),
+('Acura', 'MDX', 2016, 33000.00),
+('Buick', 'Enclave', 2017, 31000.00),
+('Alfa Romeo', 'Stelvio', 2018, 29000.00),
+('Aston Martin', 'DBX', 2019, 34000.00),
+('Ferrari', 'Portofino', 2020, 35000.00),
+('Rolls-Royce', 'Cullinan', 2017, 35000.00),
+('Lamborghini', 'Urus', 2016, 35000.00),
+('McLaren', 'GT', 2018, 35000.00),
+('Bugatti', 'Chiron', 2020, 35000.00),
+('Pagani', 'Huayra', 2019, 35000.00),
+('Koenigsegg', 'Jesko', 2015, 35000.00),
+('Lotus', 'Evora', 2020, 35000.00),
+('Rivian', 'R1S', 2019, 35000.00),
+('Lucid', 'Air', 2020, 35000.00);
+
+select * from cars
+
+SELECT * FROM cars WHERE "year" = 2018;
+SELECT * FROM cars WHERE price > 20000;
+SELECT name, COUNT(*)  FROM cars GROUP BY name;
+
+SELECT "year", AVG(price) FROM cars GROUP BY "year";
+
+SELECT * FROM cars WHERE price = (SELECT MAX(price) FROM cars);
+
+SELECT * FROM cars WHERE price BETWEEN 15000 AND 30000;
+ 
+UPDATE cars SET price = price +(price * 0.10) WHERE "year" < 2015;
+select *  from cars 
+DELETE FROM cars WHERE "year" < (SELECT strftime('%Y', 'now') - 10);
+select *  from cars
+SELECT * FROM cars AS c1 WHERE price = (
+  SELECT MAX(price) FROM cars AS c2
+   WHERE c1."year" = c2."year"
+);
+SELECT name, AVG(price) FROM cars GROUP BY name HAVING COUNT(*) > 3;
+
